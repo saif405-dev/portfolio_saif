@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saifuddin Mondal | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #4F46E5, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .skill-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: #374151;
+      overflow: hidden;
+    }
+    
+    .skill-progress {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1.5s ease-in-out;
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translate(0, 0px); }
+      50% { transform: translate(0, 15px); }
+      100% { transform: translate(0, -0px); }
+    }
+    
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    
+    .portfolio-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+    
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    
+    .slider-item {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .slider-nav {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .slider-dot.active {
+      background: white;
+    }
+    
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .slider-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+    
+    .slider-btn.prev {
+      left: 15px;
+    }
+    
+    .slider-btn.next {
+      right: 15px;
+    }
+    
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid #4F46E5;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: .15em;
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #4F46E5; }
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+      }
+    }
+    
+    .social-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-5px);
+    }
+    
+    .upload-container {
+      background: rgba(30, 41, 59, 0.8);
+      border: 2px dashed #4B5563;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .upload-container:hover {
+      border-color: #4F46E5;
+      background: rgba(30, 41, 59, 0.9);
+    }
+    
+    .upload-icon {
+      font-size: 3rem;
+      color: #6B7280;
+      margin-bottom: 1rem;
+    }
+    
+    .upload-text {
+      color: #9CA3AF;
+      margin-bottom: 1rem;
+    }
+    
+    .upload-btn {
+      background: #4F46E5;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .upload-btn:hover {
+      background: #4338CA;
+    }
+    
+    .upload-preview {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: none;
+    }
+    
+    .upload-section {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: rgba(17, 24, 39, 0.7);
+      border-radius: 12px;
+    }
+    
+    .upload-section h3 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <!-- Hero Section -->
+  <section class="h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
+    <div class="absolute inset-0 gradient-bg opacity-10"></div>
+    <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-purple-500 opacity-20 animate-pulse floating"></div>
+    <div class="absolute bottom-20 right-10 w-16 h-16 rounded-full bg-pink-500 opacity-30 floating" style="animation-delay: 1s;"></div>
+    <div class="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-blue-400 opacity-40 floating" style="animation-delay: 2s;"></div>
+    
+    <!-- Profile Photo with Upload Option -->
+    <div class="relative group">
+      <img id="profile-photo" src="https://via.placeholder.com/150" alt="Profile Photo" class="rounded-full w-40 h-40 mb-6 animate__animated animate__fadeInDown pulse-animation">
+      <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" onclick="document.getElementById('profile-upload').click()">
+        <i class="fas fa-camera text-white text-xl"></i>
+      </div>
+      <input type="file" id="profile-upload" accept="image/*" class="hidden" onchange="handleProfileUpload(event)">
+    </div>
+    
+    <h1 class="text-4xl md:text-6xl font-bold mb-2 animate__animated animate__fadeInUp">Hi, I'm <span class="gradient-text">Saifuddin</span></h1>
+    <p class="text-xl md:text-2xl text-gray-300 mb-4 animate__animated animate__fadeInUp animate__delay-1s typewriter">Photographer | Video Editor | Coding Enthusiast</p>
+    <div class="flex space-x-4 mt-4">
+      <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors">
+        <i class="fab fa-instagram text-2xl"></i>
+      </a>
+      <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors">
+        <i class="fab fa-twitter text-2xl"></i>
+      </a>
+      <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors">
+        <i class="fab fa-linkedin text-2xl"></i>
+      </a>
+      <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors">
+        <i class="fab fa-github text-2xl"></i>
+      </a>
+    </div>
+    <a href="#portfolio" class="mt-8 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-medium hover:from-blue-500 hover:to-purple-500 transition-all transform hover:scale-105 animate__animated animate__fadeInUp animate__delay-2s">
+      View My Work <i class="fas fa-arrow-down ml-2"></i>
+    </a>
+  </section>
+
+  <!-- About Me -->
+  <section id="about" class="py-20 px-4 md:px-20 bg-gray-800">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+      <div class="animate__animated animate__fadeInLeft">
+        <h2 class="text-3xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
+        <p class="text-gray-300 mb-4">
+          I'm a creative professional specializing in photography, video editing, and web development basics. I love creating visually stunning projects and interactive experiences.
+        </p>
+        <p class="text-gray-300 mb-6">
+          I enjoy combining creativity with technology to bring ideas to life. My goal is to make impactful designs and smooth animations that captivate audiences.
+        </p>
+        <div class="flex space-x-4">
+          <div class="text-center">
+            <div class="text-2xl font-bold gradient-text">50+</div>
+            <div class="text-gray-400 text-sm">Projects</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold gradient-text">3+</div>
+            <div class="text-gray-400 text-sm">Years Experience</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold gradient-text">30+</div>
+            <div class="text-gray-400 text-sm">Happy Clients</div>
+          </div>
+        </div>
+      </div>
+      <div class="animate__animated animate__fadeInRight relative">
+        <div class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25"></div>
+        <img src="https://via.placeholder.com/400x300" alt="About Image" class="rounded-lg shadow-lg relative z-10">
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-20 px-4 md:px-20">
+    <h2 class="text-3xl font-bold mb-10 text-center animate__animated animate__fadeInUp">My <span class="gradient-text">Skills</span></h2>
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
+      <div class="space-y-6">
+        <div class="bg-gray-800 p-6 rounded-xl transform hover:scale-105 transition-transform animate__animated animate__fadeInUp">
+          <div class="flex justify-between mb-2">
+            <h3 class="text-xl font-semibold">Photography</h3>
+            <span class="text-blue-400">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress bg-gradient-to-r from-blue-500 to-purple-500" style="width: 90%"></div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-xl transform hover:scale-105 transition-transform animate__animated animate__fadeInUp animate__delay-1s">
+          <div class="flex justify-between mb-2">
+            <h3 class="text-xl font-semibold">Video Editing</h3>
+            <span class="text-blue-400">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress bg-gradient-to-r from-blue-500 to-purple-500" style="width: 85%"></div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-xl transform hover:scale-105 transition-transform animate__animated animate__fadeInUp animate__delay-2s">
+          <div class="flex justify-between mb-2">
+            <h3 class="text-xl font-semibold">Web Development</h3>
+            <span class="text-blue-400">75%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress bg-gradient-to-r from-blue-500 to-purple-500" style="width: 75%"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gray-800 p-8 rounded-xl animate__animated animate__fadeInRight">
+        <h3 class="text-2xl font-bold mb-4">Tools & Technologies</h3>
+        <div class="flex flex-wrap gap-4">
+          <span class="px-4 py-2 bg-gray-700 rounded-full">Adobe Photoshop</span>
+          <span class="px-4 py-2 bg-gray-700 rounded-full">Adobe Premiere Pro</span>
+          <span class="px-4 py-2 bg-gray-700 rounded-full">HTML/CSS</span>
+          <span class="px-4 py-2 bg-gray-700 rounded-full">JavaScript</span>
+          <span class="px-4 py-2 bg-gray-700 rounded-full">Tailwind CSS</span>
+          <span class="px-4 py-2 bg-gray-700 rounded-full">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="py-20 px-4 md:px-20 bg-gray-800">
+    <h2 class="text-3xl font-bold mb-10 text-center animate__animated animate__fadeInUp">My <span class="gradient-text">Portfolio</span></h2>
+    
+    <!-- Portfolio Slider -->
+    <div class="max-w-6xl mx-auto mb-16">
+      <div class="slider-container h-96 md:h-[500px] animate__animated animate__fadeInUp">
+        <div class="slider h-full">
+          <div class="slider-item h-full flex items-center justify-center bg-gradient-to-r from-blue-900 to-purple-900 p-8">
+            <div class="text-center max-w-2xl">
+              <h3 class="text-3xl font-bold mb-4">Photography Project</h3>
+              <p class="text-gray-300 mb-6">A collection of landscape and portrait photography showcasing natural beauty and human emotions.</p>
+              <button class="px-6 py-2 bg-white text-gray-900 rounded-full font-medium">View Project</button>
+            </div>
+          </div>
+          <div class="slider-item h-full flex items-center justify-center bg-gradient-to-r from-purple-900 to-pink-900 p-8">
+            <div class="text-center max-w-2xl">
+              <h3 class="text-3xl font-bold mb-4">Video Editing Showcase</h3>
+              <p class="text-gray-300 mb-6">A compilation of video editing projects with smooth transitions and cinematic effects.</p>
+              <button class="px-6 py-2 bg-white text-gray-900 rounded-full font-medium">View Project</button>
+            </div>
+          </div>
+          <div class="slider-item h-full flex items-center justify-center bg-gradient-to-r from-pink-900 to-red-900 p-8">
+            <div class="text-center max-w-2xl">
+              <h3 class="text-3xl font-bold mb-4">Web Development Portfolio</h3>
+              <p class="text-gray-300 mb-6">Interactive websites and web applications built with modern technologies.</p>
+              <button class="px-6 py-2 bg-white text-gray-900 rounded-full font-medium">View Project</button>
+            </div>
+          </div>
+        </div>
+        <button class="slider-btn prev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-btn next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="slider-nav">
+          <div class="slider-dot active"></div>
+          <div class="slider-dot"></div>
+          <div class="slider-dot"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Portfolio Grid -->
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+      <div class="portfolio-item h-64 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg animate__animated animate__fadeInUp">
+        <div class="portfolio-overlay">
+          <h3 class="text-xl font-bold mb-2">Nature Photography</h3>
+          <p class="text-gray-300 mb-4">Capturing the beauty of natural landscapes</p>
+          <button class="px-4 py-2 bg-white text-gray-900 rounded-full text-sm">View Gallery</button>
+        </div>
+      </div>
+      <div class="portfolio-item h-64 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg animate__animated animate__fadeInUp animate__delay-1s">
+        <div class="portfolio-overlay">
+          <h3 class="text-xl font-bold mb-2">Event Videography</h3>
+          <p class="text-gray-300 mb-4">Documenting special moments with cinematic flair</p>
+          <button class="px-4 py-2 bg-white text-gray-900 rounded-full text-sm">Watch Video</button>
+        </div>
+      </div>
+      <div class="portfolio-item h-64 bg-gradient-to-r from-pink-500 to-red-500 rounded-lg animate__animated animate__fadeInUp animate__delay-2s">
+        <div class="portfolio-overlay">
+          <h3 class="text-xl font-bold mb-2">Web Design</h3>
+          <p class="text-gray-300 mb-4">Creating beautiful and functional websites</p>
+          <button class="px-4 py-2 bg-white text-gray-900 rounded-full text-sm">Visit Site</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Upload Sections -->
+    <div class="max-w-6xl mx-auto mt-16">
+      <h3 class="text-2xl font-bold mb-8 text-center">Upload Your Projects</h3>
+      
+      <!-- Photography Upload -->
+      <div class="upload-section animate__animated animate__fadeInUp">
+        <h3 class="gradient-text">Photography Project Upload</h3>
+        <div class="upload-container" onclick="document.getElementById('photography-upload').click()">
+          <i class="fas fa-camera upload-icon"></i>
+          <p class="upload-text">Click to upload your photography project images</p>
+          <button class="upload-btn">Select Files</button>
+          <input type="file" id="photography-upload" accept="image/*" multiple class="hidden" onchange="handlePhotographyUpload(event)">
+        </div>
+        <div id="photography-preview" class="grid grid-cols-3 gap-4 mt-4"></div>
+      </div>
+      
+      <!-- Video Editing Upload -->
+      <div class="upload-section animate__animated animate__fadeInUp animate__delay-1s">
+        <h3 class="gradient-text">Video Editing Showcase Upload</h3>
+        <div class="upload-container" onclick="document.getElementById('video-upload').click()">
+          <i class="fas fa-video upload-icon"></i>
+          <p class="upload-text">Click to upload your video editing project files</p>
+          <button class="upload-btn">Select Files</button>
+          <input type="file" id="video-upload" accept="video/*" multiple class="hidden" onchange="handleVideoUpload(event)">
+        </div>
+        <div id="video-preview" class="grid grid-cols-3 gap-4 mt-4"></div>
+      </div>
+      
+      <!-- Web Development Upload -->
+      <div class="upload-section animate__animated animate__fadeInUp animate__delay-2s">
+        <h3 class="gradient-text">Web Development Portfolio Upload</h3>
+        <div class="upload-container" onclick="document.getElementById('webdev-upload').click()">
+          <i class="fas fa-code upload-icon"></i>
+          <p class="upload-text">Click to upload your web development project files</p>
+          <button class="upload-btn">Select Files</button>
+          <input type="file" id="webdev-upload" accept=".zip,.rar,.7zip,.html,.css,.js" multiple class="hidden" onchange="handleWebDevUpload(event)">
+        </div>
+        <div id="webdev-preview" class="mt-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 px-4 md:px-20">
+    <h2 class="text-3xl font-bold mb-10 text-center animate__animated animate__fadeInUp">Get In <span class="gradient-text">Touch</span></h2>
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
+      <div class="animate__animated animate__fadeInLeft">
+        <h3 class="text-2xl font-bold mb-4">Let's Talk</h3>
+        <p class="text-gray-300 mb-6">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+        
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mr-4">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <p class="text-gray-400">Email</p>
+              <p>saifuddin@gmail.com</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center mr-4">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <p class="text-gray-400">Phone</p>
+              <p>+91 6297812088</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-pink-600 flex items-center justify-center mr-4">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <p class="text-gray-400">Location</p>
+              <p>Kolkata, India</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <form class="animate__animated animate__fadeInRight animate__delay-1s">
+        <div class="grid gap-6">
+          <input type="text" placeholder="Your Name" class="p-4 rounded-lg bg-gray-800 border border-gray-700 text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <input type="email" placeholder="Your Email" class="p-4 rounded-lg bg-gray-800 border border-gray-700 text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <textarea placeholder="Your Message" rows="5" class="p-4 rounded-lg bg-gray-800 border border-gray-700 text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <button type="submit" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white py-3 rounded-full transition-colors w-full font-medium">
+            Send Message <i class="fas fa-paper-plane ml-2"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-gray-900 text-center">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-center space-x-6 mb-4">
+        <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors">
+          <i class="fab fa-instagram text-xl"></i>
+        </a>
+        <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors">
+          <i class="fab fa-twitter text-xl"></i>
+        </a>
+        <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors">
+          <i class="fab fa-linkedin text-xl"></i>
+        </a>
+        <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors">
+          <i class="fab fa-github text-xl"></i>
+        </a>
+      </div>
+      <p class="text-gray-500">&copy; 2025 Saifuddin Mondal. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Slider functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const slider = document.querySelector('.slider');
+      const slides = document.querySelectorAll('.slider-item');
+      const dots = document.querySelectorAll('.slider-dot');
+      const prevBtn = document.querySelector('.slider-btn.prev');
+      const nextBtn = document.querySelector('.slider-btn.next');
+      let currentSlide = 0;
+      
+      function goToSlide(n) {
+        currentSlide = (n + slides.length) % slides.length;
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentSlide);
+        });
+      }
+      
+      function nextSlide() {
+        goToSlide(currentSlide + 1);
+      }
+      
+      function prevSlide() {
+        goToSlide(currentSlide - 1);
+      }
+      
+      // Event listeners
+      nextBtn.addEventListener('click', nextSlide);
+      prevBtn.addEventListener('click', prevSlide);
+      
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+      });
+      
+      // Auto slide
+      setInterval(nextSlide, 5000);
+      
+      // Animate skill bars when they come into view
+      const skillBars = document.querySelectorAll('.skill-progress');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const width = entry.target.style.width;
+            entry.target.style.width = '0%';
+            setTimeout(() => {
+              entry.target.style.width = width;
+            }, 300);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      skillBars.forEach(bar => {
+        observer.observe(bar);
+      });
+    });
+    
+    // Upload functionality
+    function handleProfileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profile-photo').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    function handlePhotographyUpload(event) {
+      const files = event.target.files;
+      const previewContainer = document.getElementById('photography-preview');
+      previewContainer.innerHTML = '';
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.classList.add('rounded-lg', 'h-40', 'w-full', 'object-cover');
+            previewContainer.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    }
+    
+    function handleVideoUpload(event) {
+      const files = event.target.files;
+      const previewContainer = document.getElementById('video-preview');
+      previewContainer.innerHTML = '';
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('video/')) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const videoContainer = document.createElement('div');
+            videoContainer.classList.add('relative');
+            
+            const video = document.createElement('video');
+            video.src = e.target.result;
+            video.controls = true;
+            video.classList.add('rounded-lg', 'h-40', 'w-full', 'object-cover');
+            
+            const fileName = document.createElement('p');
+            fileName.textContent = file.name;
+            fileName.classList.add('text-xs', 'text-gray-400', 'mt-1', 'truncate');
+            
+            videoContainer.appendChild(video);
+            videoContainer.appendChild(fileName);
+            previewContainer.appendChild(videoContainer);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    }
+    
+    function handleWebDevUpload(event) {
+      const files = event.target.files;
+      const previewContainer = document.getElementById('webdev-preview');
+      previewContainer.innerHTML = '';
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const fileItem = document.createElement('div');
+        fileItem.classList.add('flex', 'items-center', 'justify-between', 'p-3', 'bg-gray-700', 'rounded-lg', 'mb-2');
+        
+        const fileInfo = document.createElement('div');
+        fileInfo.classList.add('flex', 'items-center');
+        
+        const fileIcon = document.createElement('i');
+        fileIcon.classList.add('fas', 'fa-file-code', 'text-blue-400', 'mr-3');
+        
+        const fileName = document.createElement('span');
+        fileName.textContent = file.name;
+        
+        fileInfo.appendChild(fileIcon);
+        fileInfo.appendChild(fileName);
+        
+        const fileSize = document.createElement('span');
+        fileSize.textContent = (file.size / 1024).toFixed(2) + ' KB';
+        fileSize.classList.add('text-gray-400', 'text-sm');
+        
+        fileItem.appendChild(fileInfo);
+        fileItem.appendChild(fileSize);
+        
+        previewContainer.appendChild(fileItem);
+      }
+    }
+  </script>
+  <script>
+        // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBTKS7Ayu9i-HllsBtvBuBVGYiy9xSll0U",
+  authDomain: "portfolio8905.firebaseapp.com",
+  projectId: "portfolio8905",
+  storageBucket: "portfolio8905.firebasestorage.app",
+  messagingSenderId: "1094242718535",
+  appId: "1:1094242718535:web:637f0e64de92945916f262",
+  measurementId: "G-JGRX65NHED"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+    </script>
+</body>
+</html>

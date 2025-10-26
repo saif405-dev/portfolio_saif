@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel - Portfolio</title>
+  <script type="module" src="js/app.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+  <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-lg">
+    <h1 class="text-2xl font-bold mb-6 text-center">🛠 Manage Portfolio</h1>
+
+    <!-- Add / Update Form -->
+    <form id="portfolioForm" class="space-y-4">
+      <input type="hidden" id="docId" />
+
+      <div>
+        <label class="block text-gray-700">Title</label>
+        <input type="text" id="title" class="w-full border p-2 rounded" placeholder="Project Title" required>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Description</label>
+        <textarea id="description" class="w-full border p-2 rounded" placeholder="Project Description" required></textarea>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Image URL</label>
+        <input type="text" id="image" class="w-full border p-2 rounded" placeholder="https://..." required>
+      </div>
+
+      <div class="flex justify-between">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+        <button type="button" id="resetBtn" class="bg-gray-500 text-white px-4 py-2 rounded">Reset</button>
+      </div>
+    </form>
+
+    <hr class="my-6">
+
+    <!-- Portfolio List -->
+    <div id="portfolioList" class="space-y-3"></div>
+  </div>
+</body>
+</html>
